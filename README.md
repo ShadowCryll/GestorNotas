@@ -1,2 +1,4 @@
-# GestorNotas
-Proyecto Universitario - El objetivo es armar un gestor de notas que pueda tener muchas funcionalidades que nos ayuden a hacer todo más ordenado en cuanto a registros se refiere, el proyecto irá avanzando al pasar los meses. Se actualizará periódicamente el desarrollo de este proyecto :D
+# Gestor de Notas Académicas
+Proyecto Universitario - El objetivo es armar un gestor de notas que pueda tener muchas funcionalidades que nos ayuden a hacer todo más ordenado en cuanto a registros se refiere, va orientado a Estudiantes, de manera que sean capaces de usarlo sin problemas. Dicho esto, el sistema contará con las funciones de: registrar, visualizar, modificar, eliminar, analizar y organizar las calificaciones de los cursos que el estudiante ha cursado, todo esto mediante la consola del sistema en python. (No se usarán librerías externas)
+   
+Contará con un menú interactivo que nos permitirá navegar a través de las diferentes funciones, de manera qué sea fácil e intuitivo de usar, el proyecto irá avanzando al pasar los meses. Se actualizará periódicamente el desarrollo de este proyecto :D
