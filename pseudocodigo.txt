@@ -1,0 +1,74 @@
+Se preveé usar como referencia esté menú:
+  ====== GESTOR DE NOTAS ACADÉMICAS ======
+  1. Registrar nuevo curso
+  2. Mostrar todos los cursos y notas
+  3. Calcular promedio general
+  4. Contar cursos aprobados y reprobados
+  5. Buscar curso por nombre (búsqueda lineal)
+  6. Actualizar nota de un curso
+  7. Eliminar un curso
+  8. Ordenar cursos por nota (ordenamiento burbuja)
+  9. Ordenar cursos por nombre (ordenamiento inserción)
+  10. Buscar curso por nombre (búsqueda binaria)
+  11. Simular cola de solicitudes de revisión
+  12. Mostrar historial de cambios (pila)
+  13. Salir
+  Seleccione una opción:
+
+Aunque puede estar dispuesto a cambios más adelante, conforme el proyecto vaya avanzando y viendo que se requiera, también se planea hacerlo más bonito visualmente. 
+Habiendo aclarado el diseño, pasemos al pseudocódigo.
+
+    === PSEUDOCÓDIGO ===
+
+    INICIO
+    // Mostrar el título del programa
+    IMPRIMIR "====== GESTOR DE NOTAS ACADÉMICAS ======"
+
+    // Declaramos la variable para almacenar la opción del usuario
+    DEFINIR opción COMO ENTERO
+
+    // Iniciamos bucle que mantiene el menú activo hasta que el usuario elija salir
+    MIENTRAS VERDADERO HACER
+
+        // Mostrar las opciones del menú
+        IMPRIMIR "1. Registrar nuevo curso"
+        IMPRIMIR "2. Mostrar todos los cursos y notas"
+        IMPRIMIR "3. Calcular promedio general"
+        IMPRIMIR "4. Contar cursos aprobados y reprobados"
+        IMPRIMIR "5. Salir"
+
+        // Pedimos al usuario que seleccione una opción
+        IMPRIMIR "Seleccione una opción:"
+        LEER opción
+
+        // Verificamos qué opción eligió el usuario y en base a eso, se llevará a cabo dicha acción que más adelante desarrollaremos
+        // Este pseudocódigo solo desarrolla hasta la opción o paso 4 de nuestro sistema como se muestra más arriba en nuestro menú
+
+        SI opción = 1 ENTONCES
+            // Aquí irá la lógica para registrar un nuevo curso (En desarrollo)
+            <acción registrar curso>
+
+        SINO SI opción = 2 ENTONCES
+            // Aquí irá la lógica para mostrar todos los cursos y notas (En desarrollo)
+            <acción mostrar cursos>
+
+        SINO SI opción = 3 ENTONCES
+            // Aquí irá la lógica para calcular el promedio general (En desarrollo)
+            <acción calcular promedio>
+
+        SINO SI opción = 4 ENTONCES
+            // Aquí irá la lógica para contar aprobados y reprobados (En desarrollo)
+            <acción contar cursos>
+
+        SINO SI opción = 5 ENTONCES
+            // Mostrar mensaje de despedida y salir del bucle
+            IMPRIMIR "Gracias por usar el Gestor de Notas Académicas." (En desarrollo)
+            SALIR DEL BUCLE
+
+        SINO
+            // Opción inválida
+            IMPRIMIR "Opción no válida. Intente de nuevo."
+        FIN_SI
+
+    FIN_MIENTRAS
+FIN
