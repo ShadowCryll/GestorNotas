@@ -1,0 +1,126 @@
+// Para este avance se trato de implementar el seudocódigo modular, la anterior actualización tenía un formato más al
+// estilo de Pseint, se redujo el menú y se implementaron precondiciones y postcondiciones para centrarnos en los puntos
+// 1 y 3 de las 13 funciones que se planea implementar, está vez solo se trabajaran 1 y 3 como se dijo anteiormente
+// el menú es más claro con lo que respecta al avance anterior y ahora tenemos bloques de codigo exclusivos para las funciones 
+// y Procedimientos para que se vea de manera mas limpia y ordenada. También se quitaron las pre y post del menú con respecto
+// al anterior avance. (Se me olvido jaja) 
+// ============================================================================================================================
+
+// =======================================================
+// FUNCIONES
+// =======================================================
+
+// -------------------------------------------------------
+// Función: calcularPromedio
+// Precondición: 
+//   + La lista de notas contiene al menos 1 elemento
+//   + Cada nota es un número válido en el rango [0..100]
+// Postcondición: 
+//   + Retorna un número real con el promedio de todas las notas
+//   + Si la lista está vacía, entonces retorna 0
+// -------------------------------------------------------
+FUNCION calcularPromedio(listaNotas)
+    SI listaNotas está vacía ENTONCES
+        IMPRIMIR "No hay notas registradas."
+        RETORNAR 0
+    FIN SI
+
+    suma ← 0
+    PARA cada nota EN listaNotas HACER
+        suma ← suma + nota
+    FIN PARA
+
+    promedio ← suma / cantidad de elementos en listaNotas
+    RETORNAR promedio
+FIN FUNCION
+
+
+
+// =======================================================
+// PROCEDIMIENTOS
+// =======================================================
+
+// -------------------------------------------------------
+// Procedimiento: registrarNotas
+// Precondición:
+//   - El usuario debe ingresar un número positivo de notas
+//   - Cada nota ingresada debe estar en el rango [0..100]
+// Postcondición:
+//   - Todas las notas válidas ingresadas se agregan a listaNotas
+// -------------------------------------------------------
+PROCEDIMIENTO registrarNotas(listaNotas)
+    PREGUNTAR "¿Cuántas notas desea ingresar?"
+    LEER cantidad
+
+    REPETIR cantidad veces
+        PREGUNTAR "Ingrese la nota (0 a 100):"
+        LEER nota
+
+        SI nota está entre 0 y 100 ENTONCES
+            AGREGAR nota a listaNotas
+        SINO
+            IMPRIMIR "Nota inválida, intente nuevamente."
+            REPETIR esta misma iteración
+        FIN SI
+    FIN REPETIR
+
+    IMPRIMIR "Notas registradas con éxito."
+FIN PROCEDIMIENTO
+
+
+// -------------------------------------------------------
+// Procedimiento: mostrarMenu
+// Precondición: Ninguan (N/A)
+// Postcondición: Muestra las opciones disponibles al usuario :D
+// -------------------------------------------------------
+PROCEDIMIENTO mostrarMenu()
+    IMPRIMIR "====== GESTOR DE NOTAS ======"
+    IMPRIMIR "1. Registrar notas"
+    IMPRIMIR "3. Calcular promedio general"
+    IMPRIMIR "5. Salir"
+FIN PROCEDIMIENTO
+
+
+// -------------------------------------------------------
+// Función: leerOpcion
+// Precondición: El usuario debe ingresar un valor válido (1, 3 o 5)
+// Postcondición: Retorna la opción seleccionada
+// -------------------------------------------------------
+FUNCION leerOpcion()
+    PREGUNTAR "Seleccione una opción: "
+    LEER opcion
+    RETORNAR opcion
+FIN FUNCION
+
+
+
+// =======================================================
+// PROGRAMA PRINCIPAL
+// =======================================================
+INICIO PROGRAMA
+
+    listaNotas ← []   // lista vacía al inicio ya que no hay datos como tal.
+
+    mostrarMenu()
+    opcion ← leerOpcion()
+
+    MIENTRAS opcion != "5" HACER
+
+        SI opcion = 1 ENTONCES
+            registrarNotas(listaNotas)
+
+        SI opcion = 3 ENTONCES
+            promedio ← calcularPromedio(listaNotas)
+            IMPRIMIR "El promedio general es: ", promedio
+
+        mostrarMenu()
+        opcion ← leerOpcion()
+
+    FIN MIENTRAS
+
+    IMPRIMIR "Gracias por usar el Gestor de Notas."
+
+FIN PROGRAMA
+
+// NOTA: Se planea agregar mensajes más agradable en las partes donde se pregunta para hacerlo más ameno para el usuario,
+// en está actualización no se implemento pero para la siguiente se hará :D Bay jaja
