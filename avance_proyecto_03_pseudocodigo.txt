@@ -1,0 +1,255 @@
+// =======================================================
+// FUNCIONES
+// =======================================================
+
+// -------------------------------------------------------
+// Función: calcularPromedio
+// Precondición: 
+//   - listaNotas contiene al menos un valor numérico válido en [0..100]
+// Postcondición: 
+//   - Retorna un número real con el promedio de todas las notas
+//   - Si listaNotas está vacía, retorna 0
+// -------------------------------------------------------
+FUNCION calcularPromedio(listaNotas)
+    SI listaNotas está vacía ENTONCES
+        RETORNAR 0
+    FIN SI
+
+    suma ← 0
+    PARA cada nota EN listaNotas HACER
+        suma ← suma + nota
+    FIN PARA
+
+    promedio ← suma / cantidad de elementos en listaNotas
+    RETORNAR promedio
+FIN FUNCION
+
+
+// -------------------------------------------------------
+// Función: cargarDatosDesdeArchivo
+// Precondición: puede existir o no el archivo "notas.txt"
+// Postcondición: 
+//   - Retorna dos listas: listaCursos y listaNotas
+//   - Si no existe archivo, ambas listas estarán vacías
+// -------------------------------------------------------
+FUNCION (listaCursos, listaNotas) ← cargarDatosDesdeArchivo()
+    listaCursos ← []
+    listaNotas ← []
+
+    SI existe "notas.txt" ENTONCES
+        ABRIR "notas.txt" en modo lectura
+        MIENTRAS no fin de archivo HACER
+            LEER curso, nota
+            AGREGAR curso a listaCursos
+            AGREGAR nota a listaNotas
+        FIN MIENTRAS
+        CERRAR archivo
+    FIN SI
+
+    RETORNAR (listaCursos, listaNotas)
+FIN FUNCION
+
+
+
+// =======================================================
+// PROCEDIMIENTOS
+// =======================================================
+
+// -------------------------------------------------------
+// Procedimiento: guardarNotasEnArchivo
+// Precondición: listaCursos y listaNotas contienen datos válidos
+// Postcondición: el archivo "notas.txt" es sobrescrito con los datos actuales
+// -------------------------------------------------------
+PROCEDIMIENTO guardarNotasEnArchivo(listaCursos, listaNotas)
+    ABRIR "notas.txt" en modo escritura
+    PARA i ← 1 HASTA tamaño de listaCursos HACER
+        ESCRIBIR listaCursos[i], ",", listaNotas[i] en archivo
+    FIN PARA
+    CERRAR archivo
+FIN PROCEDIMIENTO
+
+
+// -------------------------------------------------------
+// Procedimiento: registrarCurso
+// Precondición: usuario ingresa un curso no vacío y una nota válida [0..100]
+// Postcondición: curso y nota son agregados a las listas y guardados en archivo
+// -------------------------------------------------------
+PROCEDIMIENTO registrarCurso(listaCursos, listaNotas)
+    PREGUNTAR "Ingrese el nombre del curso:"
+    LEER curso
+
+    PREGUNTAR "Ingrese la nota (0 a 100):"
+    LEER nota
+
+    SI nota >= 0 Y nota <= 100 ENTONCES
+        AGREGAR curso a listaCursos
+        AGREGAR nota a listaNotas
+        guardarNotasEnArchivo(listaCursos, listaNotas)
+        IMPRIMIR "Curso y nota registrados con éxito."
+    SINO
+        IMPRIMIR "Nota inválida, intente nuevamente."
+    FIN SI
+FIN PROCEDIMIENTO
+
+
+// -------------------------------------------------------
+// Procedimiento: mostrarCursos
+// Precondición: listaCursos y listaNotas pueden estar vacías
+// Postcondición: imprime los cursos con sus notas, o mensaje si no hay datos
+// -------------------------------------------------------
+PROCEDIMIENTO mostrarCursos(listaCursos, listaNotas)
+    SI listaCursos está vacía ENTONCES
+        IMPRIMIR "No hay cursos registrados."
+    SINO
+        PARA i ← 1 HASTA tamaño de listaCursos HACER
+            IMPRIMIR i, ". ", listaCursos[i], " - Nota: ", listaNotas[i]
+        FIN PARA
+    FIN SI
+FIN PROCEDIMIENTO
+
+
+// -------------------------------------------------------
+// Procedimiento: contarAprobados
+// Precondición: listaNotas contiene valores numéricos en [0..100]
+// Postcondición: muestra la cantidad de cursos aprobados y reprobados
+// -------------------------------------------------------
+PROCEDIMIENTO contarAprobados(listaNotas)
+    aprobados ← 0
+    reprobados ← 0
+
+    PARA cada nota EN listaNotas HACER
+        SI nota >= 60 ENTONCES
+            aprobados ← aprobados + 1
+        SINO
+            reprobados ← reprobados + 1
+        FIN SI
+    FIN PARA
+
+    IMPRIMIR "Cursos aprobados: ", aprobados
+    IMPRIMIR "Cursos reprobados: ", reprobados
+FIN PROCEDIMIENTO
+
+
+// -------------------------------------------------------
+// Procedimiento: buscarCurso (búsqueda lineal)
+// Precondición: listaCursos y listaNotas contienen registros
+// Postcondición: muestra el curso y nota si lo encuentra, o un mensaje si no
+// -------------------------------------------------------
+PROCEDIMIENTO buscarCurso(listaCursos, listaNotas)
+    PREGUNTAR "Ingrese el nombre del curso a buscar:"
+    LEER buscado
+
+    encontrado ← FALSO
+    PARA i ← 1 HASTA tamaño de listaCursos HACER
+        SI listaCursos[i] = buscado ENTONCES
+            IMPRIMIR "Curso encontrado: ", listaCursos[i], " - Nota: ", listaNotas[i]
+            encontrado ← VERDADERO
+        FIN SI
+    FIN PARA
+
+    SI encontrado = FALSO ENTONCES
+        IMPRIMIR "Curso no encontrado."
+    FIN SI
+FIN PROCEDIMIENTO
+
+
+// -------------------------------------------------------
+// Procedimiento: actualizarNota
+// Precondición: listaCursos y listaNotas contienen registros
+// Postcondición: si el curso existe, su nota se actualiza y se guarda en archivo
+// -------------------------------------------------------
+PROCEDIMIENTO actualizarNota(listaCursos, listaNotas)
+    PREGUNTAR "Ingrese el nombre del curso a actualizar:"
+    LEER buscado
+
+    encontrado ← FALSO
+    PARA i ← 1 HASTA tamaño de listaCursos HACER
+        SI listaCursos[i] = buscado ENTONCES
+            PREGUNTAR "Ingrese la nueva nota (0 a 100):"
+            LEER nuevaNota
+
+            SI nuevaNota >= 0 Y nuevaNota <= 100 ENTONCES
+                listaNotas[i] ← nuevaNota
+                guardarNotasEnArchivo(listaCursos, listaNotas)
+                IMPRIMIR "Nota actualizada con éxito."
+            SINO
+                IMPRIMIR "Nota inválida."
+            FIN SI
+
+            encontrado ← VERDADERO
+        FIN SI
+    FIN PARA
+
+    SI encontrado = FALSO ENTONCES
+        IMPRIMIR "Curso no encontrado."
+    FIN SI
+FIN PROCEDIMIENTO
+
+
+// -------------------------------------------------------
+// Procedimiento: mostrarMenu
+// Precondición: N/A
+// Postcondición: muestra las opciones disponibles al usuario
+// -------------------------------------------------------
+PROCEDIMIENTO mostrarMenu()
+    IMPRIMIR "====== GESTOR DE NOTAS ======"
+    IMPRIMIR "1. Registrar curso y nota"
+    IMPRIMIR "2. Mostrar cursos y notas"
+    IMPRIMIR "3. Calcular promedio general"
+    IMPRIMIR "4. Contar aprobados y reprobados"
+    IMPRIMIR "5. Buscar curso por nombre"
+    IMPRIMIR "6. Actualizar nota de un curso"
+    IMPRIMIR "7. Salir"
+FIN PROCEDIMIENTO
+
+
+// -------------------------------------------------------
+// Función: leerOpcion
+// Precondición: usuario debe ingresar un valor válido (1–7)
+// Postcondición: retorna la opción seleccionada
+// -------------------------------------------------------
+FUNCION leerOpcion()
+    PREGUNTAR "Seleccione una opción: "
+    LEER opcion
+    RETORNAR opcion
+FIN FUNCION
+
+
+
+// =======================================================
+// PROGRAMA PRINCIPAL
+// =======================================================
+INICIO PROGRAMA
+
+    (listaCursos, listaNotas) ← cargarDatosDesdeArchivo()
+
+    mostrarMenu()
+    opcion ← leerOpcion()
+
+    MIENTRAS opcion ≠ 7 HACER
+        SI opcion = 1 ENTONCES
+            registrarCurso(listaCursos, listaNotas)
+
+        SI opcion = 2 ENTONCES
+            mostrarCursos(listaCursos, listaNotas)
+
+        SI opcion = 3 ENTONCES
+            promedio ← calcularPromedio(listaNotas)
+            IMPRIMIR "Promedio general: ", promedio
+
+        SI opcion = 4 ENTONCES
+            contarAprobados(listaNotas)
+
+        SI opcion = 5 ENTONCES
+            buscarCurso(listaCursos, listaNotas)
+
+        SI opcion = 6 ENTONCES
+            actualizarNota(listaCursos, listaNotas)
+
+        mostrarMenu()
+        opcion ← leerOpcion()
+    FIN MIENTRAS
+
+    IMPRIMIR "Gracias por usar el Gestor de Notas."
+
+FIN PROGRAMA
