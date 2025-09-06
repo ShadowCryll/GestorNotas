@@ -1,6 +1,8 @@
 # =======================================================
 # FUNCIONES
 # =======================================================
+# Se prevee mas adelante crear una array de estudiantes con sus cursos y notas
+# Por ahora, se maneja una lista de cursos y una lista de notas
 
 def calcular_promedio(lista_notas):
     """
