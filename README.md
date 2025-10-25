@@ -9,37 +9,45 @@ Actualmente, la información se maneja **en memoria** (no se guarda en archivos)
 
 =======================================
 
-## Funcionalidades Implementadas
-Con lo que llevamos hasta el **Avance 04**, el programa permite:
+## Fases de desarrollo del proyecto
 
-1. **Registrar estudiante (3 cursos iniciales)**  
-   - Se solicita el nombre del estudinte.  
-   - Se ingresan exactamente 3 cursos con sus respectivas notas (validadas entre 0 y 100).  
+### **Avance 1 y 2 – Fundamentos y modularidad**
+- Se implementó el registro de notas de varios estudiantes o cursos.  
+- Se aplicó el principio de **modularidad**, dividiendo el código en funciones y procedimientos con responsabilidades específicas.  
+- Se introdujeron **precondiciones** y **postcondiciones** para cada función, mejorando la documentación y trazabilidad del código.  
+- Validación de notas dentro del rango [0–100].
 
-2. **Mostrar estudiantes y notas**  
-   - Lista todos los estudiantes registrados.  
-   - Muestra cada curso, su nota y el promedio individual del estudiante.  
+### **Avance 3 – Condicionales, contadores y búsqueda**
+- Se incorporaron estructuras condicionales y contadores para determinar cursos **aprobados y reprobados**.  
+- Implementación de **búsqueda lineal** para localizar cursos por nombre.  
+- Se mejoró la interacción con el usuario mediante menús iterativos.  
 
-3. **Contar aprobados y reprobados**  
-   - Recorre todas las notas registradas.  
-   - Muestra el número total de cursos aprobaos (≥ 60) y reprobados (< 60).  
+### **Avance 4 – Eliminación, listas y modularización**
+- Se añadió la opción de **eliminar cursos** del registro.  
+- Introducción del concepto de **listas dinámicas**, reemplazando estructuras fijas.  
+- Cada módulo fue documentado y aislado según su responsabilidad.  
+- Se incluyó la base para futuras estructuras como pilas y colas.
 
-4. **Buscar estudiante por nombre**  
-   - Permite ingresar el nombre de un estudiante.  
-   - Si existe, muestra sus cursos, notas y promedio.  
-   - Si no existe, avisa al usuario.  
+### **Avance 5 – Pilas, colas y ordenamientos**
+- Implementación de una **pila (LIFO)** para registrar el **historial de acciones** (altas, modificaciones y eliminaciones).  
+- Creación de una **cola (FIFO)** que simula una lista de **solicitudes de revisión académica**, donde los cursos se atienden en orden de llegada.  
+- Incorporación de dos algoritmos de ordenamiento:
+  - **Burbuja**: para ordenar cursos por nota (de mayor a menor).  
+  - **Inserción**: para ordenar cursos alfabéticamente por nombre.  
+- Se añadió la **búsqueda binaria**, complementando la búsqueda lineal y mejorando la eficiencia.  
+- Menú actualizado con 13 opciones principales que integran todas las funcionalidades.
 
-5. **Actualizar nota de un curso**  
-   - Se selecciona un estudiante y uno de sus cursos.  
-   - Permite cambiar la nota, siempre validando que esté en el rango [0..100].  
+### **Avance 6 – Reestructuración con Programación Orientada a Objetos**
+- Introducción de las clases `Curso` y `GestorNotas`.  
+- Atributos y métodos definidos dentro de `__init__`, sin variables de clase ni decoradores.  
+- Métodos principales:
+  - `registrar_curso(nombre, nota)`
+  - `mostrar_cursos()`
+- Uso de listas internas para almacenar objetos `Curso`.  
+- Se conserva el mismo flujo de interacción, pero con una arquitectura más limpia y reutilizable.  
+- Este avance marca la transición hacia un sistema completamente basado en objetos.
 
-6. **Eliminar curso de un estudiante**  
-   - Se selecciona un estudiante y uno de sus cursos.  
-   - El curso se elimina de su registro.  
-
-7. **Salir**  
-   - Termina la ejecución del programa.  
-
+---
 ====================================
 
 ## Estructura del Programa
@@ -58,61 +66,99 @@ El código está dividido en tres secciones principales:
   Ejecuta las funciones y procedimientos según la opción seleccionada por el usuario.  
 
 ============================================
+##  Estructuras de datos utilizadas
 
-## Ejecución
-1. Clonar o descargar este repositorio.  
-2. Abrir la carpeta en VSCode (o cualquier IDE de Python).  
-3. Ejecutar el programa:  
+| Tipo de estructura | Implementación | Propósito principal |
+|--------------------|----------------|----------------------|
+| **Lista** | `list` de Python | Almacenar los cursos y sus notas. |
+| **Pila (LIFO)** | `append()` / `pop()` | Guardar historial de acciones. |
+| **Cola (FIFO)** | `append()` / `pop(0)` | Gestionar solicitudes de revisión. |
 
-```bash
-python gestor_notas.py
-```
+---
 
-4. Interactuar con el menú:  
+##  Algoritmos implementados
 
-```
-====== GESTOR DE NOTAS ======
-1. Registrar estudiante (3 cursos)
-2. Mostrar estudiantes y notas
-3. Contar aprobados y reprobados
-4. Buscar estudiante por nombre
-5. Actualizar nota de un curso
-6. Eliminar curso de un estudiante
-7. Salir
-```
+| Algoritmo | Tipo | Uso dentro del sistema |
+|------------|------|------------------------|
+| **Burbuja (Bubble Sort)** | Ordenamiento | Ordenar cursos por nota. |
+| **Inserción (Insertion Sort)** | Ordenamiento | Ordenar cursos por nombre. |
+| **Búsqueda lineal** | Búsqueda secuencial | Localizar cursos por nombre (sin ordenar). |
+| **Búsqueda binaria** | Búsqueda optimizada | Buscar cursos en listas previamente ordenadas. |
+
+---
+
+##  Arquitectura modular y flujo
+
+El sistema sigue un flujo lógico basado en la interacción del usuario con el menú principal.  
+Cada opción del menú ejecuta un módulo o función específica, garantizando independencia entre las operaciones.  
+El control de flujo utiliza un ciclo repetitivo `while` que finaliza únicamente cuando el usuario selecciona la opción “Salir”.
+
+El diseño modular favorece:
+- **Mantenimiento del código**: cada función se puede modificar sin afectar otras.  
+- **Reutilización**: funciones puras que pueden usarse en otros programas.  
+- **Claridad**: estructura limpia, legible y fácil de depurar.  
+
+---
+
+##  Organización del código
+
+- `avance_proyecto_06.py` → versión completa con todas las funcionalidades integradas.  
+- `gestor_notas.py` (opcional) → versión orientada a objetos con clases separadas.  
+- `README.md` → documentación principal del proyecto.  
+- `Guía_tecnico.pdf` → documento técnico con explicación detallada de la estructura interna.  
+- `Guía_usuario.pdf` → guía visual para la interacción con el programa.  
+============================================
+
+## Requisitos de ejecución
+
+- Python **3.10** o superior.  
+- Editor recomendado: **VS Code** o **PyCharm**.  
+- No requiere librerías externas.  
+- El programa se ejecuta directamente desde consola:
+  ```bash
+  python avance_proyecto_06.py
 
 ---
 
 ## Ejemplo de uso
 ```
-Seleccione una opción: 1
-Ingrese el nombre del estudiante: Ana
-Ingrese el nombre del curso 1: Matemáticas
-Ingrese la nota de Matemáticas (0 a 100): 90
-Ingrese el nombre del curso 2: Historia
-Ingrese la nota de Historia (0 a 100): 75
-Ingrese el nombre del curso 3: Física
-Ingrese la nota de Física (0 a 100): 82
-Estudiante registrado con éxito.
+====== GESTOR DE NOTAS ACADÉMICAS ======
+1. Registrar nuevo curso
+2. Mostrar todos los cursos y notas
+3. Calcular promedio general
+4. Contar cursos aprobados y reprobados
+5. Buscar curso por nombre (búsqueda lineal)
+6. Actualizar nota de un curso
+7. Eliminar un curso
+8. Ordenar cursos por nota (burbuja)
+9. Ordenar cursos por nombre (inserción)
+10. Buscar curso por nombre (búsqueda binaria)
+11. Simular cola de revisión
+12. Mostrar historial
+13. Salir
 
-Seleccione una opción: 2
-
-1. Ana
-   Matemáticas - Nota: 90.0
-   Historia - Nota: 75.0
-   Física - Nota: 82.0
-   Promedio: 82.33
+Selecciones una opción: 1
+Curso registrado con éxito.
+Promedio general: 87.5
+Historial actualizado: Registro de Matemáticas agregado.
 ```
+--- 
 
-============================================
+## Reflexión personal
 
-## Estado del Proyecto
-- Avance 02 -> Registro de notas y promedios.  
-- Avance 03 -> Condicionales, contadores, búsqueda y actualización de datos.  
-- Avance 04 -> Eliminación de cursos, uso de listas, funciones y modularización.  
-- Próximos avances -> Estadísticas generales, eliminación completa de estudiantes, persistencia en archivos.
-- Aún hay partes por arreglar y mejorar, hago mención de esto en **avance_proyecto_04.py** en comentarios nada más abrir el archivo.
-- Pero para resumir un poco falta, mejorar la funcion de promedio, ya que toma en cuenta los cursos y no promedio general, ya qué cada
-- estudiante tiene 3 cursos, los toma individualmente y no en general. Otro podía ser la eliminacion de cursos, ya que se puede dejar a un estudiante
-- solo con 2, 1 o 0 cursos sin la posibilidad de borrar los datos pero que quedé el lugar vacante, basicámente eliminación completa. Entre otras cosas más
-- por mejorar, pero bueno, eso es todo por mi parte :D 
+Durante el desarrollo del proyecto Gestor de Notas Académicas, aprendí de forma práctica cómo los conceptos fundamentales de la programación pueden integrarse en un sistema completo y funcional.
+Al principio, el trabajo consistía únicamente en escribir pseudocódigo estructurado, pero conforme avanzaban las fases del proyecto, fui comprendiendo la importancia de la modularidad, la reutilización del código, y la organización por responsabilidades.
+
+La implementación de estructuras de datos (listas, pilas y colas) me ayudó a entender cómo se puede simular el comportamiento de modelos reales dentro de un programa.
+Más adelante, al aplicar algoritmos de ordenamiento y búsqueda, noté cómo el rendimiento y la claridad del código dependen de la elección del método correcto según la situación.
+Finalmente, la incorporación de la Programación Orientada a Objetos (POO) me permitió visualizar los cursos y las notas no como simples datos, sino como entidades con atributos y comportamientos propios.
+
+Lo más desafiante fue reorganizar el sistema sin romper su estructura previa, asegurando que todas las funciones conservaran coherencia y compatibilidad.
+También fue un reto mantener el equilibrio entre un diseño limpio y la funcionalidad completa, especialmente al integrar nuevas características como el historial y la cola de revisión.
+
+Si tuviera más tiempo, me gustaría mejorar la persistencia del sistema, permitiendo guardar y recuperar los datos desde archivos o incluso una base de datos local.
+También exploraría el uso de interfaces gráficas (GUI) para hacerlo más visual e intuitivo.
+
+En general, este proyecto me permitió afianzar conceptos clave de la lógica de programación, comprender el valor del diseño modular y adquirir una visión más amplia sobre cómo se construye un sistema bien estructurado desde cero.
+
+Y... Bueno, eso sería todo por mi parte. Sin duda alguna fue un proecto muy divertido de hacer :D
